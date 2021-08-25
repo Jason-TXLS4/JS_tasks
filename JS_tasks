@@ -1,0 +1,138 @@
+function isPalindrome(inputString) {
+  
+  var str = inputString.toLowerCase();
+  str = str.replace(/[^A-Za-z0-9]/g, '')
+  str = str.replace(/\s/g, '')
+  var reverseStr = str.split("").reverse().join("");
+  reverseStr = reverseStr.replace(/\s/g, '')
+  return reverseStr === str;
+}
+
+
+function getFibonacciUntil(n) {
+ 
+   var nums = [0];
+   if(n === 1 || n === 0)
+    {
+    	return nums;
+    }
+    if( n === 2)
+    {
+    	nums.push(1);
+        return nums;
+    }
+    nums = getFibonacciUntil(n-1)
+    nums.push(nums[nums.length - 1] + nums[nums.length - 2])
+    return nums;
+  
+}
+
+
+function areParenthesesBalanced(inputString) {
+	
+    var firstOpen = inputString.indexOf("(");
+    var firstClose = inputString.indexOf(")");
+    if(firstOpen > firstClose)
+    {
+    	return false;
+    }
+    var lastOpen = inputString.lastIndexOf("(");
+    var lastClose = inputString.lastIndexOf(")");
+  	if(lastOpen > lastClose)
+    {
+    	return false;
+    }
+    var opens = 0;
+    var closes = 0;
+    
+    for(let i = 0; i < inputString.length;i++){
+    	if (inputString[i] === '(')
+        {
+        	opens++;
+        }
+        else if(inputString[i] === ')')
+        {
+        	closes++;
+        }
+	}
+    if(opens != closes) 
+    	{return false;}
+    return true;
+}
+
+
+function getFizzBuzzUntil(n) {
+	var arr = [];
+  	for(let i = 1; i <= n ;i++){
+  		if(i % 3 === 0 && i % 5 === 0)
+      	  {arr.push("FizzBuzz");}
+        else if(i % 3 === 0)
+      	  {arr.push("Fizz");}
+        else if(i % 5 === 0)
+     	   {arr.push("Buzz");}
+        else
+      	  {arr.push(i);}
+  	}
+  	return arr;
+}
+
+
+function encryptCaesar(inputString, key) {
+  const stringArr = [];
+  for(let i = 0; i < inputString.length; i++){
+  	stringArr.push(String.fromCharCode(inputString.charCodeAt(i) + key)); 
+  }
+  var newString = stringArr.join('');
+  return newString;
+}
+
+
+function encryptCaesar(inputString, key) {
+  const stringArr = [];
+  //make an array of charracter codes to allow for wrapping around
+  const nums = [];
+  for(let i = 65;i < 91;i++){//65 is A - 90 is Z. Using only capital letters
+  	nums.push(i);
+  }
+  inputString = inputString.toUpperCase();
+  for(let i = 0; i < inputString.length; i++){
+  	var currentCode = inputString.charCodeAt(i);//get currect code
+    var currentIndex = nums.indexOf(currentCode);//find where in array that code is
+    var newIndex = (currentIndex + key) % nums.length ;//loops back to beginning of the array
+    var newCode = nums[newIndex];//get code at new index
+    stringArr.push(String.fromCharCode(newCode)); //add new letter to coded string
+  }
+  var newString = stringArr.join('');
+  //pushing to an array should be faster than concatenating, hence the decision to use and array and then join() is. 
+  return newString;
+}
+
+
+function Reduce(array, reducer, initialValue) {
+	
+    for(let i = 0; i < array.length ; i++){
+    	initialValue = exampleReducer(initialValue,array[i])
+    }
+    return initialValue;
+}
+
+
+function Circle(center, radius){
+
+  return {
+    center,
+    radius,
+    getCircumference() {
+      return 2 * radius * Math.PI;
+    },
+    getArea() {
+      return radius ** 2 * Math.PI;
+    },
+    includes(Point){
+    return (Math.pow(Point.x - center.x,2) + Math.pow(Point.y - center.y,2)) <= Math.pow(radius,2);
+  }
+}
+}
+function Point(x,y){
+  return{x,y};
+}
